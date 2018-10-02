@@ -7,15 +7,8 @@
 //
 
 import UIKit
-import RxSwift
 
-class ViewController: UIViewController {// SelectionDelegate {
-    //    func didTapOnCharacter(backgroundColor: UIColor, image: UIImage?) {
-    //        self.view.backgroundColor = backgroundColor
-    //        self.imageView.image = image
-    //    }
-    
-    let disposeBag = DisposeBag()
+class ViewController: UIViewController, SelectionDelegate {
     let selectViewController = SelectViewController()
     
     let chooseButton:UIButton = {
@@ -39,22 +32,18 @@ class ViewController: UIViewController {// SelectionDelegate {
         super.viewDidLoad()
         view.addSubview(chooseButton)
         view.addSubview(imageView)
-        //        selectViewController.selectDelegate = self
-        bindSelectedCharacted()
+        selectViewController.selectDelegate = self
         setUpLayout()
-    }
-    
-    func bindSelectedCharacted(){
-        selectViewController.selectedCharacter
-            .subscribe(onNext: {[weak self] character in
-                self?.view.backgroundColor = character.backgroundColor
-                self?.imageView.image = character.image
-            }).disposed(by: disposeBag)
     }
     
     @objc func buttonPressed(){
         print("Pressed")
         self.navigationController?.pushViewController(selectViewController, animated: true)
+    }
+    
+    func didTapOnCharacter(character: Character) {
+        self.view.backgroundColor = character.backgroundColor
+        self.imageView.image = character.image
     }
     
     func setUpLayout() {
