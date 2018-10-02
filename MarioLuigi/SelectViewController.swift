@@ -9,18 +9,13 @@ import UIKit
 import SwiftGifOrigin
 import RxSwift
 
-protocol SelectionDelegate {
-    func didTapOnCharacter(backgroundColor: UIColor, image: UIImage?)
-}
-
 class SelectViewController: UIViewController {
-    
-    var selectDelegate: SelectionDelegate?
     
     private let selectedCharacterSubject = PublishSubject<Character>()
     var selectedCharacter:Observable<Character> {
         return selectedCharacterSubject.asObservable()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(marioButton)
@@ -47,11 +42,8 @@ class SelectViewController: UIViewController {
         return button
     }()
     
-
-    
     @objc func marioPressed(){
         print("Mario Pressed")
-        //        selectDelegate?.didTapOnCharacter(backgroundColor: .red, image: marioButton.imageView?.image)
         guard let image = marioButton.imageView?.image else {return}
         selectedCharacterSubject.on(.next(Character.init(backgroundColor: .red, image: image)))
         navigationController?.popViewController(animated: true)
@@ -59,7 +51,6 @@ class SelectViewController: UIViewController {
     
     @objc func luigiPressed(){
         print("Luigi Pressed")
-        //selectDelegate?.didTapOnCharacter(backgroundColor: .green, image: luigiButton.imageView?.image)
         guard let image = luigiButton.imageView?.image else {return}
         selectedCharacterSubject.on(.next(Character.init(backgroundColor: .green, image: image)))
         navigationController?.popViewController(animated: true)
@@ -75,7 +66,6 @@ class SelectViewController: UIViewController {
         luigiButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         luigiButton.imageView?.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1/3).isActive = true
         luigiButton.imageView?.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1/3).isActive = true
-        
     }
     
 }

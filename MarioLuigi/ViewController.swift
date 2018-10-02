@@ -9,12 +9,8 @@
 import UIKit
 import RxSwift
 
-class ViewController: UIViewController {// SelectionDelegate {
-    //    func didTapOnCharacter(backgroundColor: UIColor, image: UIImage?) {
-    //        self.view.backgroundColor = backgroundColor
-    //        self.imageView.image = image
-    //    }
-    
+class ViewController: UIViewController {
+
     let disposeBag = DisposeBag()
     let selectViewController = SelectViewController()
     
@@ -39,7 +35,6 @@ class ViewController: UIViewController {// SelectionDelegate {
         super.viewDidLoad()
         view.addSubview(chooseButton)
         view.addSubview(imageView)
-        //        selectViewController.selectDelegate = self
         bindSelectedCharacted()
         setUpLayout()
     }
