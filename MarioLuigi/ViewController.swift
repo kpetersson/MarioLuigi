@@ -25,6 +25,7 @@ class ViewController: UIViewController, SelectionDelegate {
     let imageView:UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "mario_mushroom_big"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
